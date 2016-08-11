@@ -26,10 +26,10 @@ namespace ParseArisData
             public int[] target_vel;
             [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.I4, SizeConst = MOT_NUM)]
             public int[] feedback_vel;
-            [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.I4, SizeConst = MOT_NUM)]
-            public int[] target_cur;
-            [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.I4, SizeConst = MOT_NUM)]
-            public int[] feedback_cur;
+            [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.I2, SizeConst = MOT_NUM)]
+            public Int16[] target_cur;
+            [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.I2, SizeConst = MOT_NUM)]
+            public Int16[] feedback_cur;
             [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = MOT_NUM)]
             public byte[] cmd;
             [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = MOT_NUM)]
@@ -87,6 +87,8 @@ namespace ParseArisData
             //ArisData data = new ArisData();
             //Console.SetWindowSize(1920, 1080);
             Console.WriteLine("UDP started");
+            System.Threading.Thread.Sleep(500);
+            Console.Clear();
             while (!isEnd)
             {
                 
@@ -97,86 +99,73 @@ namespace ParseArisData
                 
                 GetExchangeData(ref data);
 
-                Console.Clear();
-                Console.WriteLine(" Time :"+data.count);
-                Console.Write("cmdpos:");
+                Console.SetCursorPosition(0,0);
+                Console.WriteLine(" Time :" + data.count.ToString().PadLeft(10,' ')+" ");
+                Console.Write("cmdpos".PadLeft(20,' ')+" ");
+                Console.Write("fdkpos".PadLeft(20, ' ')+" ");
+                Console.Write("fdkcur".PadLeft(6, ' ')+" ");
+                Console.Write("stawrd".PadLeft(6, ' ')+" ");
+                Console.WriteLine("cmdwrd".PadLeft(6, ' '));
+
                 for (int i=0;i<MOT_NUM;i++)
                 {
-                    Console.Write(data.target_pos[i].ToString()+"\t");
+                    Console.Write(data.target_pos[i].ToString().PadLeft(20, ' ') + " ");
+                    Console.Write(data.feedback_pos[i].ToString().PadLeft(20, ' ') + " ");
+                    Console.Write(data.feedback_cur[i].ToString().PadLeft(6, ' ') + " ");
+                    Console.Write(data.statusword[i].ToString().PadLeft(6, ' ') + " ");
+                    Console.Write(data.cmd[i].ToString().PadLeft(6, ' ') );
+                    Console.WriteLine();
                 }
-                Console.WriteLine();
-                Console.Write("fdkpos:");
-                for (int i = 0; i < MOT_NUM; i++)
-                {
-                    Console.Write(data.feedback_pos[i].ToString() + "\t");
-                }
-                Console.WriteLine();
-                Console.Write("fdkcur:");
-                for (int i = 0; i < MOT_NUM; i++)
-                {
-                    Console.Write(data.feedback_cur[i].ToString() + "\t");
-                }
-                Console.WriteLine();
-
-                Console.Write("stawrd:");
-                for (int i = 0; i < MOT_NUM; i++)
-                {
-                    Console.Write(data.statusword[i].ToString() + "\t");
-                }
-                Console.WriteLine();
-
-                Console.Write("cmdwrd:");
-                for (int i = 0; i < MOT_NUM; i++)
-                {
-                    Console.Write(data.cmd[i].ToString() + "\t");
-                }
-                Console.WriteLine();
+                
+                
 
                 Console.Write("fsr_fx :");
                 for (int i = 0; i < FOR_NUM; i++)
                 {
-                    Console.Write(data.Fx[i]+"\t");
+                    Console.Write(data.Fx[i].ToString("#.##").PadLeft(10,' ') +" ");
                 }
                 Console.WriteLine();
 
                 Console.Write("fsr_fy :");
                 for (int i = 0; i < FOR_NUM; i++)
                 {
-                    Console.Write(data.Fy[i] + "\t");
+                    Console.Write(data.Fy[i].ToString("#.##").PadLeft(10, ' ') + " ");
                 }
                 Console.WriteLine();
 
                 Console.Write("fsr_fz :");
                 for (int i = 0; i < FOR_NUM; i++)
                 {
-                    Console.Write(data.Fz[i] + "\t");
+                    Console.Write(data.Fz[i].ToString("#.##").PadLeft(10, ' ') + " ");
                 }
                 Console.WriteLine();
 
                 Console.Write("fsr_mx :");
                 for (int i = 0; i < FOR_NUM; i++)
                 {
-                    Console.Write(data.Mx[i] + "\t");
+                    Console.Write(data.Mx[i].ToString("#.##").PadLeft(10, ' ') + " ");
                 }
                 Console.WriteLine();
 
                 Console.Write("fsr_my :");
                 for (int i = 0; i < FOR_NUM; i++)
                 {
-                    Console.Write(data.My[i] + "\t");
+                    Console.Write(data.My[i].ToString("#.##").PadLeft(10, ' ') + " ");
                 }
                 Console.WriteLine();
 
                 Console.Write("fsr_mz :");
                 for (int i = 0; i < FOR_NUM; i++)
                 {
-                    Console.Write(data.Mz[i] + "\t");
+                    Console.Write(data.Mz[i].ToString("#.##").PadLeft(10, ' ') + " ");
                 }
                 Console.WriteLine();
 
-                Console.WriteLine("  IMU :"+data.roll+"\t"+data.pitch+"\t"+data.yaw);
+                Console.WriteLine("  IMU :"+data.roll.ToString("#.##").PadLeft(10, ' ') 
+                    + "\t"+data.pitch.ToString("#.##").PadLeft(10, ' ') 
+                    + "\t"+data.yaw.ToString("#.##").PadLeft(10, ' '));
 
-                System.Threading.Thread.Sleep(50);
+                System.Threading.Thread.Sleep(500);
                 
             }
             Console.WriteLine("exit");
