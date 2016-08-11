@@ -76,7 +76,7 @@ namespace ParseArisData
         [DllImport("ArisUDPClient.dll", EntryPoint = "GetExchangeData", CharSet = CharSet.Ansi, ExactSpelling = false, CallingConvention = CallingConvention.StdCall)]
         public static extern void GetExchangeData(ref ArisData data);
 
-
+        static ArisData data;
 
         static void Main(string[] args)
         {
@@ -84,25 +84,98 @@ namespace ParseArisData
             //StartUDPListener();
             udplistener.Start();
             bool isEnd = false;
-            ArisData data = new ArisData();
+            //ArisData data = new ArisData();
+            //Console.SetWindowSize(1920, 1080);
+            Console.WriteLine("UDP started");
             while (!isEnd)
             {
-                Console.WriteLine("UDP started");
+                
                 //string a = Console.ReadKey().Key.ToString();
                 //Console.Write(a);
                 //a = a.Substring(0,a.Length-1);
                 //Console.Write(a);
+                
                 GetExchangeData(ref data);
 
-                Console.WriteLine("C#:"+data.cmd[0].ToString());
+                Console.WriteLine(" Time :"+data.count);
+                Console.Write("cmdpos:");
+                for (int i=0;i<MOT_NUM;i++)
+                {
+                    Console.Write(data.target_pos[i].ToString()+"\t");
+                }
+                Console.WriteLine();
+                Console.Write("fdkpos:");
+                for (int i = 0; i < MOT_NUM; i++)
+                {
+                    Console.Write(data.feedback_pos[i].ToString() + "\t");
+                }
+                Console.WriteLine();
+                Console.Write("fdkcur:");
+                for (int i = 0; i < MOT_NUM; i++)
+                {
+                    Console.Write(data.feedback_cur[i].ToString() + "\t");
+                }
+                Console.WriteLine();
 
-                //if (string.Compare("E",a)==0)
-                //{
-                //    Console.WriteLine("exit");
-                //    isEnd = true;
-                //    udplistener.Abort();
-                //    break;
-                //}
+                Console.Write("stawrd:");
+                for (int i = 0; i < MOT_NUM; i++)
+                {
+                    Console.Write(data.statusword[i].ToString() + "\t");
+                }
+                Console.WriteLine();
+
+                Console.Write("cmdwrd:");
+                for (int i = 0; i < MOT_NUM; i++)
+                {
+                    Console.Write(data.cmd[i].ToString() + "\t");
+                }
+                Console.WriteLine();
+
+                Console.Write("fsr_fx :");
+                for (int i = 0; i < FOR_NUM; i++)
+                {
+                    Console.Write(data.Fx[i]+"\t");
+                }
+                Console.WriteLine();
+
+                Console.Write("fsr_fy :");
+                for (int i = 0; i < FOR_NUM; i++)
+                {
+                    Console.Write(data.Fy[i] + "\t");
+                }
+                Console.WriteLine();
+
+                Console.Write("fsr_fz :");
+                for (int i = 0; i < FOR_NUM; i++)
+                {
+                    Console.Write(data.Fz[i] + "\t");
+                }
+                Console.WriteLine();
+
+                Console.Write("fsr_mx :");
+                for (int i = 0; i < FOR_NUM; i++)
+                {
+                    Console.Write(data.Mx[i] + "\t");
+                }
+                Console.WriteLine();
+
+                Console.Write("fsr_my :");
+                for (int i = 0; i < FOR_NUM; i++)
+                {
+                    Console.Write(data.My[i] + "\t");
+                }
+                Console.WriteLine();
+
+                Console.Write("fsr_mz :");
+                for (int i = 0; i < FOR_NUM; i++)
+                {
+                    Console.Write(data.Mz[i] + "\t");
+                }
+                Console.WriteLine();
+
+                Console.WriteLine("  IMU :"+data.roll+"\t"+data.pitch+"\t"+data.yaw);
+
+                System.Threading.Thread.Sleep(2000);
                 
             }
             Console.WriteLine("exit");
