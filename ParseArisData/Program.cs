@@ -12,7 +12,7 @@ namespace ParseArisData
     {
 
         const int MOT_NUM = 19;
-        const int FOR_NUM = 6;
+        const int FOR_NUM = 7;
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
         public struct ArisData
