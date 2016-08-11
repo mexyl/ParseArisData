@@ -97,6 +97,7 @@ namespace ParseArisData
                 
                 GetExchangeData(ref data);
 
+                Console.Clear();
                 Console.WriteLine(" Time :"+data.count);
                 Console.Write("cmdpos:");
                 for (int i=0;i<MOT_NUM;i++)
@@ -175,7 +176,7 @@ namespace ParseArisData
 
                 Console.WriteLine("  IMU :"+data.roll+"\t"+data.pitch+"\t"+data.yaw);
 
-                System.Threading.Thread.Sleep(2000);
+                System.Threading.Thread.Sleep(50);
                 
             }
             Console.WriteLine("exit");
