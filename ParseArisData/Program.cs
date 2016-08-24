@@ -122,50 +122,50 @@ namespace ParseArisData
                 Console.Write("fsr_fx :");
                 for (int i = 0; i < FOR_NUM; i++)
                 {
-                    Console.Write(data.Fx[i].ToString("#.##").PadLeft(10,' ') +" ");
+                    Console.Write(data.Fx[i].ToString("0.00").PadLeft(10,' ') +" ");
                 }
                 Console.WriteLine();
 
                 Console.Write("fsr_fy :");
                 for (int i = 0; i < FOR_NUM; i++)
                 {
-                    Console.Write(data.Fy[i].ToString("#.##").PadLeft(10, ' ') + " ");
+                    Console.Write(data.Fy[i].ToString("0.00").PadLeft(10, ' ') + " ");
                 }
                 Console.WriteLine();
 
                 Console.Write("fsr_fz :");
                 for (int i = 0; i < FOR_NUM; i++)
                 {
-                    Console.Write(data.Fz[i].ToString("#.##").PadLeft(10, ' ') + " ");
+                    Console.Write(data.Fz[i].ToString("0.00").PadLeft(10, ' ') + " ");
                 }
                 Console.WriteLine();
 
                 Console.Write("fsr_mx :");
                 for (int i = 0; i < FOR_NUM; i++)
                 {
-                    Console.Write(data.Mx[i].ToString("#.##").PadLeft(10, ' ') + " ");
+                    Console.Write(data.Mx[i].ToString("0.00").PadLeft(10, ' ') + " ");
                 }
                 Console.WriteLine();
 
                 Console.Write("fsr_my :");
                 for (int i = 0; i < FOR_NUM; i++)
                 {
-                    Console.Write(data.My[i].ToString("#.##").PadLeft(10, ' ') + " ");
+                    Console.Write(data.My[i].ToString("0.00").PadLeft(10, ' ') + " ");
                 }
                 Console.WriteLine();
 
                 Console.Write("fsr_mz :");
                 for (int i = 0; i < FOR_NUM; i++)
                 {
-                    Console.Write(data.Mz[i].ToString("#.##").PadLeft(10, ' ') + " ");
+                    Console.Write(data.Mz[i].ToString("0.00").PadLeft(10, ' ') + " ");
                 }
                 Console.WriteLine();
 
-                Console.WriteLine("  IMU :"+data.roll.ToString("#.##").PadLeft(10, ' ') 
-                    + "\t"+data.pitch.ToString("#.##").PadLeft(10, ' ') 
-                    + "\t"+data.yaw.ToString("#.##").PadLeft(10, ' '));
+                Console.WriteLine("  IMU :"+data.roll.ToString("0.00").PadLeft(10, ' ') 
+                    + "\t"+data.pitch.ToString("0.00").PadLeft(10, ' ') 
+                    + "\t"+data.yaw.ToString("0.00").PadLeft(10, ' '));
 
-                System.Threading.Thread.Sleep(500);
+                System.Threading.Thread.Sleep(100);
                 
             }
             Console.WriteLine("exit");
